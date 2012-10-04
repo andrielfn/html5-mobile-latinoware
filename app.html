@@ -1,50 +1,101 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>
-        </title>
-        <link rel="stylesheet" href="/jquery.mobile-1.2.0.css" />
-        <style>
-            /* App custom styles */
-        </style>
-        <script src="/jquery-1.8.2.min.js"></script>
-        <script src="/jquery.mobile-1.2.0.js"></script>
-        </script>
-    </head>
-    <body>
-        <!-- Home -->
-        <div data-role="page" id="page1">
-            <div data-theme="a" data-role="header">
-                <h3>Latinoware 2012 | Palestras</h3>
-            </div>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Latinoware 2012 | Palestras</title> 
+    <link rel="stylesheet" href="/jquery.mobile-1.2.0.css" />
+    <script src="/jquery-1.8.2.min.js"></script>
+    <script src="/jquery.mobile-1.2.0.js"></script>
+</head> 
+
+<body> 
+
+    <!-- Start of first page -->
+    <div data-role="page" id="one">
+
+        <div data-role="header">
+            <h1>Latinoware 2012 | Palestras</h1>
             <div data-role="navbar">
                 <ul>
-                    <li><a href="app.html" data-transition="slide">Primeiro dia</a></li>
-                    <li><a href="app.html" data-transition="slide">Segundo dia</a></li>
-                    <li><a href="app.html" data-transition="slide">Terceiro dia</a></li>
+                    <li><a href="#one">Primeiro dia</a></li>
+                    <li><a href="#two">Segundo dia</a></li>
+                    <li><a href="#three">Terceiro dia</a></li>
                 </ul>
             </div><!-- /navbar -->
-            <div data-role="content">
-                <ul data-role="listview" data-filter="true"  data-inset="false" id="speechs">
-                    <!-- content is showed here -->
-                </ul>
-            </div>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <ul data-role="listview" data-filter="true"  data-inset="false" id="speechs-day-17">
+                <!-- content is showed here -->
+            </ul>
         </div>
-        <script>
-            $.getJSON("speechs.json", function(data){
-                output = "";
-                $.each(data.speechs, function(key, value){
-                    output += "<li data-theme=\"c\">"
-                    output += "<h3 class=\"ui-li-heading\">"+ value.title +"</h3>"
-                    output += "<p class=\"ui-li-desc\"><strong>"+ value.speaker +"</strong></p>"
-                    output += "<p class=\"ui-li-desc\">"+ value.space +"</p>"
-                    output += "<span class=\"ui-li-count\">"+ value.time +"</span>"
-                    output +=  "</li>"
-                });
-                $('#speechs').append(output).listview('refresh');
+    </div><!-- /page -->
+
+
+    <!-- Start of second page -->
+    <div data-role="page" id="two">
+
+        <div data-role="header">
+            <h1>Latinoware 2012 | Palestras</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#one">Primeiro dia</a></li>
+                    <li><a href="#two">Segundo dia</a></li>
+                    <li><a href="#three">Terceiro dia</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <ul data-role="listview" data-filter="true"  data-inset="false" id="speechs-day-18">
+                <!-- content is showed here -->
+            </ul>
+        </div>
+    </div><!-- /page -->
+
+     <!-- Start of second page -->
+    <div data-role="page" id="three">
+
+        <div data-role="header">
+            <h1>Latinoware 2012 | Palestras</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#one">Primeiro dia</a></li>
+                    <li><a href="#two">Segundo dia</a></li>
+                    <li><a href="#three">Terceiro dia</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <ul data-role="listview" data-filter="true"  data-inset="false" id="speechs-day-19">
+                <!-- content is showed here -->
+            </ul>
+        </div>
+    </div><!-- /page -->
+
+     <script>
+        $.getJSON("speechs.json", function(data){
+            output = new Array();
+            $.each(data.speechs, function(key, value){
+                day = value.date.split("-")[2];
+                if(output[day] == undefined) output[day] = "";
+                output[day] += "<li data-theme=\"c\">"
+                output[day] += "<h3 class=\"ui-li-heading\">"+ value.title +"</h3>"
+                output[day] += "<p class=\"ui-li-desc\"><strong>"+ value.speaker +"</strong></p>"
+                output[day] += "<p class=\"ui-li-desc\">"+ value.space +"</p>"
+                output[day] += "<span class=\"ui-li-count\">"+ value.time +"</span>"
+                output[day] +=  "</li>"
             });
-        </script>
-    </body>
+            console.log(output['17'])
+            $('#speechs-day-17').append(output['17']).listview('refresh');
+            $('#speechs-day-18').append(output['18']);
+            $('#speechs-day-19').append(output['19']);
+        });
+    </script>
+</body>
+
+</body>
 </html>
